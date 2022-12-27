@@ -1,0 +1,63 @@
+<!-- Componente para capturar e mostrar os pokemons capturados-->
+
+<h1>Capturar Pokemon!</h1>
+
+<!-- Form Capturar Pokemon -->
+<div>
+    <form id="formThrowPokeball" [formGroup]="pokemonFormGroup" (ngSubmit)="throwPokeball()">
+        <input id="pokemonName" type="text" placeholder="Digite o nome do pokemon..." maxlength="30" formControlName="pokemonName" [readonly]="errorMessage ? true : false"/>
+        <br/>
+        <br/>
+        <button id="throwPokeballButton" type="submit" [disabled]="!pokemonFormGroup.valid || errorMessage">Pokebola Vai!</button>
+    </form>
+</div>
+
+<!-- Resultado da captura do Pokemon -->
+<div id="pokeballContainer" *ngIf="pokeball">
+    <!-- Pokemon capturado!-->
+    <div *ngIf="pokeball.pokemon" class="row">
+        <div class="pokemon-caught-img">
+            <img src="{{getPokemonImageUrl(pokeball)}}" width="32" height="32">
+        </div>
+        <div>
+            <p id="pokeballWithPokemon">Pokemon {{pokeball.pokemon.name}} capturado!</p>
+        </div>
+    </div>
+    <!-- Pokemon escapou!-->
+    <div id="pokeballEmpty" *ngIf="pokeball.pokemon == null">
+        <p>Pokemon {{pokemonFormGroup.controls['pokemonName'].value}} escapou!</p>
+    </div>
+</div>
+
+<!-- Mensagem de erro -->
+<div *ngIf="errorMessage">
+    <p>Erro ao recuperar informações: {{errorMessage}}</p>
+</div>
+
+<hr/>
+
+<!-- Pokemons capturados -->
+<div id="pokemonListContainer" *ngIf="!errorMessage && pokeballs.length > 0">
+    <h2>Pokemons Capturados!</h2>
+    <table id="pokemonListTable">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Imagem</td>
+                <td>Pokemon</td>        
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pokeball of pokeballs">
+                <td class="align-right pokemon-td-id">{{pokeball.pokemon.id}}</td>    
+                <td class="align-center pokemon-td-image"><img src="{{getPokemonImageUrl(pokeball)}}" width="32" height="32"></td>
+                <td class="align-left pokemon-td-name">{{pokeball.pokemon.name}}</td>        
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Nenhum pokemon capturado-->
+<div id="pokemonCaughtEmpty" *ngIf="!errorMessage && pokeballsLoaded">
+    <h2>Ainda não capturou nunhum pokemon</h2>
+</div>
