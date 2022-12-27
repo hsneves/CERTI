@@ -2,3 +2,6 @@
 /.settings/
 /.classpath
 /.project
+/.gitignore.bak
+/certi-cta-pokemon-test.db
+/certi-cta-pokemon.db
