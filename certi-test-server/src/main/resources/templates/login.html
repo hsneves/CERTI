@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	    <title>CERTI - Catch them all!!</title>
+	
+	    <!-- Bootstrap core CSS -->
+		<link href="3rdps/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	    <!-- favicon -->
+		<link rel="icon" href="img/favicon.png">
+	
+	    <style>
+	      .bd-placeholder-img {
+	        font-size: 1.125rem;
+	        text-anchor: middle;
+	        -webkit-user-select: none;
+	        -moz-user-select: none;
+	        user-select: none;
+	      }
+	
+	      @media (min-width: 768px) {
+	        .bd-placeholder-img-lg {
+	          font-size: 3.5rem;
+	        }
+	      }
+	    </style>
+	
+	    <!-- Folha de estilos para o template de login -->
+	    <link href="css/certi-test-login.css" rel="stylesheet">
+    
+	</head>
+  
+	<body class="text-center">
+    
+		<main class="form-signin">
+		
+		  <form th:action="@{/login}" method="post">
+		  
+		    <h2>CERTI - Catch them all!</h2>
+		    
+			<div style="height: 15px"></div>
+			
+	        <div th:if="${param.expired}" class="message-panel">
+	            Sessão expirada
+	        </div>
+	        <div th:if="${param.error}" class="message-panel">
+	            Nome de usuário ou senha inválidos
+	        </div>
+	        <div th:if="${param.logout}" class="message-panel">
+	            Você saiu do sistema
+	        </div>			
+	        
+		    <label for="username" class="visually-hidden">Usuário</label>
+		    <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+		    
+		    <label for="password" class="visually-hidden">Senha</label>
+		    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+		    
+		    <div class="checkbox mb-3">
+		      <label>
+		        <input type="checkbox" class="form-check-input" name="remember-me"> Me Lembrar
+		      </label>
+		    </div>
+		    
+		    <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+		    <p class="mt-5 mb-3 text-muted">Copyright: Henrique Silveira Neves - 2022</p>
+		    
+		  </form>
+		  
+		</main>
+	
+	</body>
+</html>
