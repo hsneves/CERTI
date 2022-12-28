@@ -58,6 +58,6 @@
 </div>
 
 <!-- Nenhum pokemon capturado-->
-<div id="pokemonCaughtEmpty" *ngIf="!errorMessage && pokeballs.length == 0">
+<div id="pokemonCaughtEmpty" *ngIf="!errorMessage && pokeballsLoaded && pokeballs.length == 0">
     <h2>Ainda não capturou nenhum pokemon</h2>
 </div>

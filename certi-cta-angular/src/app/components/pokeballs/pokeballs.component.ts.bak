@@ -1,4 +1,4 @@
-import { Component, HostListener, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MetaData, NgEventBus } from 'ng-event-bus';
 import { Pokeball } from 'src/app/models/pokeball';
@@ -13,6 +13,8 @@ import { Constants } from 'src/app/utils/constants';
 export class PokeballsComponent implements OnInit, OnDestroy {
 
   pokeballs: Array<Pokeball> = new Array();
+
+  pokeballsLoaded: boolean = false;
 
   pokeball!: Pokeball | null;
 
@@ -132,6 +134,7 @@ export class PokeballsComponent implements OnInit, OnDestroy {
   private removeSelfData(): void {
     this.pokeballs = [];
     this.pokeball = null;
+    this.pokeballsLoaded = false;
   }
 
   /**
@@ -193,10 +196,15 @@ export class PokeballsComponent implements OnInit, OnDestroy {
    */
   private loadPokeballs() {
     console.log("PokeballsComponent.loadPokeballs() | Carregando pokebolas...");
-    this.pokemonService.getPokeballs().subscribe(pokeballs => {
-      console.log("PokeballsComponent.loadPokeballs() | Pokebolas carregadas = [" + pokeballs.length + "]");
-      this.pokeballs = pokeballs;
-    });
+    if (!this.pokeballsLoaded) {
+      this.pokemonService.getPokeballs().subscribe(pokeballs => {
+        console.log("PokeballsComponent.loadPokeballs() | Pokebolas carregadas = [" + pokeballs.length + "]");
+        this.pokeballs = pokeballs;
+        this.pokeballsLoaded = true;
+      });
+    } else {
+      console.log("PokeballsComponent.loadPokeballs() | Pokebolas já carregadas = [" + this.pokeballs.length + "]");
+    }
   }
 
   /**
