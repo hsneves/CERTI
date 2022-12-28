@@ -8,7 +8,7 @@ CERTI - Desafio Catch them all!
   - certi-cta-angular.zip
     - Frontend em angular para consumir os serviços REST do backend e cliente do Server-Sent Evens.
 
-  - certi-cta-flutter.zip
+  - certi-cta-flutter-app.zip
     - Frontend em flutter para consumir os serviços REST do backend e cliente do Server-Sent Evens.
 
 - showcase:
